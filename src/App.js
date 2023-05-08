@@ -15,7 +15,7 @@ function App() {
       <Header/>
         <div className="container py-5">
           <Routes> 
-            <Route path={ROUTES.LOGIN} element={<Login />} />
+            <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
           </Routes>  
         </div>
