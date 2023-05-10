@@ -1,7 +1,8 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import { signupSchema } from "../schemas";
 import axios from "axios";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -12,8 +13,8 @@ const initialValues = {
 };
 
 const Signup = () => {
-
-  const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+  let navigate = useNavigate();
+  const { values, errors, handleBlur, handleChange, handleSubmit, touched, isValid, dirty } =
     useFormik({
       initialValues: initialValues,
       validationSchema: signupSchema,
@@ -34,6 +35,8 @@ const Signup = () => {
                 repassword: `${values.repassword}`,
               });
               action.resetForm();
+              
+              navigate("/");
             }
           });
       },
@@ -162,10 +165,11 @@ const Signup = () => {
              
             </div>
             <div className="row">
-              <div className="col text-center">
-              <button type="submit" className="btn btn-primary mt-4">
-                Submit
-              </button>
+              <div className="col text-center"> 
+                  <button type="submit" className="btn btn-primary mt-4" disabled={!(isValid && dirty)}>
+                    Submit
+                  </button>
+                
               </div>
             </div>
           </div>

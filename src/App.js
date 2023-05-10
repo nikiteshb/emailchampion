@@ -3,11 +3,13 @@ import React from 'react';
 import "./scss/index.scss" 
 import "bootstrap/dist/js/bootstrap";
 import { BrowserRouter as Router,Route, Routes } from 'react-router-dom';
-import * as ROUTES from "./constants/Routes"
+import * as ROUTES from "./navigation/Routes"
 import Login from './components/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
+import Dashboard from './pages/dashboard/Dashboard'; 
+import ContactList from './pages/contacts/ContactList';
 function App() {
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
           <Routes> 
             <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
+            <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> 
+            <Route path={ROUTES.CONTACT} element={<ContactList />} /> 
           </Routes>  
         </div>
       <Footer/>
