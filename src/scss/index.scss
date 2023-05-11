@@ -1,7 +1,12 @@
+  
 @import "_variables";
+
+  
 
 @import "~bootstrap/scss/bootstrap";
 
 @import "_common";
 
 @import "./pages/_login";
+@import "./Pages/certificate";
+@import "./Pages/musicevent";

@@ -1,0 +1,10 @@
+.certificate{
+    border: 20px solid $secondary;
+    h1,h3{
+        color: $primary;
+        font-family:$font-family-monospace;
+    }
+    .name{
+        text-decoration: underline;
+    }
+}

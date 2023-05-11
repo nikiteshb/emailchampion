@@ -10,6 +10,10 @@ import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Dashboard from './pages/dashboard/Dashboard'; 
 import ContactList from './pages/contacts/ContactList';
+import CampaignsList from './pages/campaigns/CampaignsList';
+import TemplateList from './pages/templates/TemplateList';
+import Certificate from './pages/templates/Certificate';
+import MusicEvent from './pages/templates/MusicEvent';
 function App() {
   return (
     <>
@@ -20,7 +24,11 @@ function App() {
             <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
             <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> 
-            <Route path={ROUTES.CONTACT} element={<ContactList />} /> 
+            <Route path={ROUTES.CONTACTS} element={<ContactList />} /> 
+            <Route path={ROUTES.CAMPAIGNS} element={<CampaignsList />} /> 
+            <Route path={ROUTES.TEMPLATES} element={<TemplateList />} /> 
+            <Route path={ROUTES.CERTIFICATE} element={<Certificate />} /> 
+            <Route path={ROUTES.MUSICEVENT} element={<MusicEvent/>} />
           </Routes>  
         </div>
       <Footer/>

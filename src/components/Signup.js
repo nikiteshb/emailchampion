@@ -66,7 +66,7 @@ const Signup = () => {
                   onBlur={handleBlur}
                 />
                 {errors.name && touched.name ? (
-                  <p className="form-error">{errors.name}</p>
+                  <p className="form-error py-2 text-danger">{errors.name}</p>
                 ) : null}
               </div>
             </div>
@@ -88,7 +88,7 @@ const Signup = () => {
                     onBlur={handleBlur}
                   />
                   {errors.phone && touched.phone ? (
-                    <p className="form-error">{errors.phone}</p>
+                    <p className="form-error py-2 text-danger">{errors.phone}</p>
                   ) : null}
                 </div>
               </div>
@@ -112,7 +112,7 @@ const Signup = () => {
                   onBlur={handleBlur}
                 />
                 {errors.email && touched.email ? (
-                  <p className="form-error">{errors.email}</p>
+                  <p className="form-error py-2 text-danger">{errors.email}</p>
                 ) : null}
               </div>
             </div>
@@ -136,7 +136,7 @@ const Signup = () => {
                   onBlur={handleBlur}
                 />
                 {errors.password && touched.password ? (
-                  <p className="form-error">{errors.password}</p>
+                  <p className="form-error py-2 text-danger">{errors.password}</p>
                 ) : null}
               </div>
               
@@ -159,7 +159,7 @@ const Signup = () => {
                   onBlur={handleBlur}
                 />
                 {errors.repassword && touched.repassword ? (
-                  <p className="form-error">{errors.repassword}</p>
+                  <p className="form-error py-2 text-danger">{errors.repassword}</p>
                 ) : null}
               </div>
              

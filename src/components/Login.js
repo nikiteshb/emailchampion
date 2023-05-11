@@ -56,7 +56,7 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
                 {errors.email && touched.email ? (
-                  <p className="form-error">{errors.email}</p>
+                  <p className="form-error py-2 text-danger">{errors.email}</p>
                 ) : null}
               </div>
               <div className="form-group mb-3">
@@ -76,7 +76,7 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
                 {errors.password && touched.password ? (
-                  <p className="form-error">{errors.password}</p>
+                  <p className="form-error py-2 text-danger">{errors.password}</p>
                 ) : null}
               </div>
               
