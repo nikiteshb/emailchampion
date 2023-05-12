@@ -11,7 +11,8 @@ function CampaignsList() {
             </button>
           </div>
       </div>
-      <table className="table table-bordered table-striped table-responsive">
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped table-responsive">
         <thead>
           <tr>
             <th scope="col">Campaign Name</th>
@@ -59,6 +60,8 @@ function CampaignsList() {
           </tr>
         </tbody>
       </table>
+      </div>
+      
     </>
   )
 }

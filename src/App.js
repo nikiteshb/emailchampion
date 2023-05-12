@@ -14,6 +14,7 @@ import CampaignsList from './pages/campaigns/CampaignsList';
 import TemplateList from './pages/templates/TemplateList';
 import Certificate from './pages/templates/Certificate';
 import MusicEvent from './pages/templates/MusicEvent';
+import EnergyBill from './pages/templates/EnergyBill';
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
             <Route path={ROUTES.TEMPLATES} element={<TemplateList />} /> 
             <Route path={ROUTES.CERTIFICATE} element={<Certificate />} /> 
             <Route path={ROUTES.MUSICEVENT} element={<MusicEvent/>} />
+            <Route path={ROUTES.ENERGYBILL} element={<EnergyBill/>} />
           </Routes>  
         </div>
       <Footer/>

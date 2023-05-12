@@ -6,7 +6,7 @@ function Dashboard() {
     <>
         <div className="container">
             <div className="row">
-                <div className="col-lg-3">
+                <div className="col-lg-3 my-3">
                 <div className="card bg-secondary"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Contacts</h5>
@@ -15,7 +15,7 @@ function Dashboard() {
                 </div>
                 </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3 my-3">
                 <div className="card bg-secondary"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Campaigns</h5>
@@ -24,7 +24,7 @@ function Dashboard() {
                 </div>
                 </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3 my-3">
                 <div className="card bg-secondary"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Templates</h5>

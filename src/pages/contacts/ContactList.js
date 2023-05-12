@@ -10,7 +10,8 @@ function ContactList() {
             </button>
           </div>
       </div>
-      <table className="table table-bordered table-striped table-responsive">
+      <div className="table-responsive">
+      <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th scope="col">First Name</th>
@@ -54,6 +55,7 @@ function ContactList() {
           </tr>
         </tbody>
       </table>
+      </div>
     </>
   );
 }
