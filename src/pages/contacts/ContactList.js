@@ -33,15 +33,23 @@ function ContactList() {
           </thead>
           <tbody>
              {
-              AllContacts.map(contact =>{
+              AllContacts.map((contact,index) =>{
                 return (
-                  <tr key={contact.id}>
+                  <tr key={index}>
                     <td>{contact.first_name}</td>
                     <td>{contact.last_name}</td>
                     <td>{contact.email}</td>
                     <td>{contact.gender}</td>
                     <td>1/12/2012</td>
-                    <td><MdMode /> <Link><MdOutlineDelete onClick={() =>(contactService.deleteContact(contact.id))} /></Link></td>
+                    <td> 
+                    <button type="button" className="btn btn-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                      <MdMode />
+                    </button>
+                    <button type="button" className="btn btn-link" onClick={() =>(contactService.deleteContact(contact.id))}>
+                    <MdOutlineDelete/>
+                    </button>
+
+                    </td>
                   </tr>
                 )
               })
