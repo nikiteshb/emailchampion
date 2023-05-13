@@ -3,6 +3,7 @@ import { Formik, useFormik } from "formik";
 import { signupSchema } from "../schemas";
 import axios from "axios";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
+import {addUser,getUsers} from "../services/userService";
 
 const initialValues = {
   name: "",
@@ -19,23 +20,21 @@ const Signup = () => {
       initialValues: initialValues,
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
-        const receivedData = axios
-          .get("http://localhost:3000/users")
+        const receivedData = getUsers()
           .then((res) => {
             const resdata = res.data;
             const isExist = resdata.filter(
               (item) => item.email === values.email
             );
             if (isExist.length === 0) {
-              const { data } = axios.post("http://localhost:3000/users", {
+              const { data } = addUser({
                 name: `${values.name}`,
                 phone: `${values.phone}`,
                 email: `${values.email}`,
                 password: `${values.password}`,
                 repassword: `${values.repassword}`,
               });
-              action.resetForm();
-              
+              action.resetForm();              
               navigate("/");
             }
           });

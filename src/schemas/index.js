@@ -16,4 +16,12 @@ const loginSchema = Yup.object({
     password:Yup.string().required("Please enter your password")
 })
 
-export {signupSchema,loginSchema} 
+const ContactSchema = Yup.object({     
+      firstName: Yup.string().min(2).max(30).required("Please enter First Name"),
+      lastName: Yup.string().min(2).max(30).required("Please enter Last Name"),
+      email: Yup.string().email().required("Please enter Email"),
+      gender: Yup.string().required("Please Select Gender"),
+      city: Yup.string().min(2).max(30).required("Please Select City"),
+})
+
+export {signupSchema,loginSchema,ContactSchema} 
