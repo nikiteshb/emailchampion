@@ -15,6 +15,8 @@ import TemplateList from './pages/templates/TemplateList';
 import Certificate from './pages/templates/Certificate';
 import MusicEvent from './pages/templates/MusicEvent';
 import EnergyBill from './pages/templates/EnergyBill';
+import NotFound from './pages/error/NotFound';
+
 function App() {
   return (
     <>
@@ -24,13 +26,14 @@ function App() {
           <Routes> 
             <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
-            <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> 
+            <Route path={ROUTES.USER} element={<Dashboard />} /> 
             <Route path={ROUTES.CONTACTS} element={<ContactList />} /> 
             <Route path={ROUTES.CAMPAIGNS} element={<CampaignsList />} /> 
             <Route path={ROUTES.TEMPLATES} element={<TemplateList />} /> 
             <Route path={ROUTES.CERTIFICATE} element={<Certificate />} /> 
             <Route path={ROUTES.MUSICEVENT} element={<MusicEvent/>} />
             <Route path={ROUTES.ENERGYBILL} element={<EnergyBill/>} />
+            <Route path="*" element={<NotFound/>} />
           </Routes>  
         </div>
       <Footer/>

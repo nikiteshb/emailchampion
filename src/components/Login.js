@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { loginSchema } from "../schemas";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getUsers } from "../services/userService";
 
 const initialValues = {
   email: "",
@@ -15,17 +16,15 @@ const Login = () => {
     initialValues: initialValues,
     validationSchema:loginSchema,
     onSubmit:(values,action) =>{
-      const getData = axios.get("http://localhost:3000/users")
+      getUsers()
       .then((res) => {
         const resdata = res.data;
         const isExist = resdata.filter(
-          (item,id) => (
-            (item.email === values.email) && (item.password === values.password),
-            setUserId({id})
+          item => (
+            (item.email === values.email) && (item.password === values.password)
           ));
-        console.log(userId.id,isExist.length === 0);
-        if (isExist.length === 0) {
-          navigate(`/user/${userId.id}`);
+        if (isExist) {
+          navigate(`/user/${isExist[0].id}`);
         }
       });
 

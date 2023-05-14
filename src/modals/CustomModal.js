@@ -1,8 +1,8 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import {Formik } from 'formik'
-function CustomModal(props) {
  
+function CustomModal(props) {
+    
   return (
      <>
         <Modal

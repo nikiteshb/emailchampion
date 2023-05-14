@@ -3,17 +3,17 @@ import axios from 'axios'
 
 const contactBaseUrl = "http://localhost:3000/contacts";
 
-function getContacts(){
-    return axios.get(contactBaseUrl)
+async function getContacts(){
+    return await axios.get(contactBaseUrl)
 }
-function addContact(contact){
-    return axios.post(contactBaseUrl,contact)
+async function addContact(contact){
+    return await axios.post(contactBaseUrl,contact)
 }
-function updateContact(id,contact){
-    return axios.put(`${contactBaseUrl}/${id}`,contact)
+async function updateContact(id,contact){
+    return await axios.put(`${contactBaseUrl}/${id}`,contact)
 }
-function deleteContact(id){
-    return axios.delete(`${contactBaseUrl}/${id}`)
+async function deleteContact(id){
+    return await axios.delete(`${contactBaseUrl}/${id}`)
 }
 
 export {getContacts,addContact,updateContact,deleteContact} 
