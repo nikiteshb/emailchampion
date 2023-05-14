@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import React from "react";
 import { addContact } from "../../services/contactService";
 import { ContactSchema } from "../../schemas";
-
 let initialValues = {
   userId: "",
   firstName: "",
@@ -12,8 +11,7 @@ let initialValues = {
   city: "",
   createdAt: "",
 };
-
-function AddEditContact(props) {
+function AddEditContact(props,contact) {
   let currDate = new Date();
 
   const {
@@ -43,7 +41,7 @@ function AddEditContact(props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} id="addEditForm">
+      <form onSubmit={handleSubmit} id="addEdit">
         <h1>{props.IsEdit ? "Edit User" : "Add User"}</h1>
         <div className="row">
           <div className="col-lg-6 mb-3">
