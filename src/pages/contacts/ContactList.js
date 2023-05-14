@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MdMode, MdOutlineDelete } from "react-icons/md";
 
 import AddEditContact from "./AddEditContact";
-import {addContact, deleteContact, getContacts } from "../../services/contactService"; 
+import { deleteContact, getContacts } from "../../services/contactService"; 
 import CustomModal from "../../modals/CustomModal";
 import DeleteModal from "../../modals/DeleteModal";
-import { Formik } from "formik";
 
   
 function ContactList() {

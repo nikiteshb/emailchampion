@@ -6,13 +6,13 @@ const contactBaseUrl = "http://localhost:3000/contacts";
 function getContacts(){
     return axios.get(contactBaseUrl)
 }
-function addContact(contact){ 
-    return axios.post(contactBaseUrl,contact)    
+function addContact(contact){
+    return axios.post(contactBaseUrl,contact)
 }
-function updateContact(id,contact){ 
+function updateContact(id,contact){
     return axios.put(`${contactBaseUrl}/${id}`,contact)
 }
-function deleteContact(id){ 
+function deleteContact(id){
     return axios.delete(`${contactBaseUrl}/${id}`)
 }
 

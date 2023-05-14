@@ -147,7 +147,7 @@ function AddEditContact(props) {
         {/* <div className="col-12 text-center"><button className="btn btn-primary" type='submit' >Submit</button></div> */}
       </form>
     </>
-  );
+  )
 }
 
-export default AddEditContact;
+export default AddEditContact
