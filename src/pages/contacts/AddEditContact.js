@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { addContact } from "../../services/contactService";
 import { ContactSchema } from "../../schemas";
 
@@ -14,8 +14,7 @@ let initialValues = {
 };
 
 function AddEditContact(props) {
-  let currDate = new Date();
-
+  let currDate = new Date(); 
   const {
     values,
     errors,
@@ -28,7 +27,7 @@ function AddEditContact(props) {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ContactSchema,
-    onSubmit: (values, action) => {
+    onSubmit: (values, action) => { 
       let { data } = addContact({
         userId: "2",
         firstName: `${values.firstName}`,
@@ -38,6 +37,8 @@ function AddEditContact(props) {
         city: `${values.city}`,
         createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
       });
+      props.confirmModal()
+      console.log("contact added");
     },
   });
 

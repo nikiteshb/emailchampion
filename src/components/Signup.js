@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, useFormik } from "formik";
 import { signupSchema } from "../schemas";
 import axios from "axios";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import {addUser,getUsers} from "../services/userService";
 
 const initialValues = {
@@ -170,6 +170,9 @@ const Signup = () => {
                   </button>
                 
               </div>
+            </div>
+            <div className="row pt-3">
+              <div className="col-12 d-flex justify-content-center ">Already have account? <Link to="/" className='nav-link px-2 fw-bold text-primary'> Login </Link></div>
             </div>
           </div>
         </form>

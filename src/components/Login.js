@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { loginSchema } from "../schemas";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUsers } from "../services/userService";
 
 const initialValues = {
@@ -10,8 +10,7 @@ const initialValues = {
   password: "",
 };
 const Login = () => {
-  let navigate = useNavigate();
-  let [userId,setUserId] = useState("")
+  let navigate = useNavigate(); 
   const {values,errors,handleBlur,handleChange,handleSubmit,touched, isValid, dirty} = useFormik({
     initialValues: initialValues,
     validationSchema:loginSchema,
@@ -26,6 +25,7 @@ const Login = () => {
         if (isExist) {
           navigate(`/user/${isExist[0].id}`);
         }
+      }).catch((errors)=>{ 
       });
 
     }
@@ -86,7 +86,11 @@ const Login = () => {
                   </button>
             </div>
           </div>
+           
         </form>
+        <div className="row pt-3">
+          <div className="col-12 d-flex justify-content-center ">Need an account? <Link to="/signup" className='nav-link px-2 fw-bold text-primary'> Signup </Link></div>
+        </div>
       </div>
     </>
   );
