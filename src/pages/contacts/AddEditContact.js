@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { addContact } from "../../services/contactService";
+import { addContact, getContacts } from "../../services/contactService";
 import { ContactSchema } from "../../schemas";
+import { getUsers } from "../../services/userService";
 
 let initialValues = {
   userId: "",
@@ -27,19 +28,28 @@ function AddEditContact(props) {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ContactSchema,
-    onSubmit: (values, action) => { 
-      let { data } = addContact({
-        userId: "2",
-        firstName: `${values.firstName}`,
-        lastName: `${values.lastName}`,
-        email: `${values.email}`,
-        gender: `${values.gender}`,
-        city: `${values.city}`,
-        createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
-      });
-      props.confirmModal()
-      console.log("contact added");
-    },
+    onSubmit: (values, action) => {       
+      const receivedData = getContacts()
+          .then(res => {
+            const resdata = res.data;
+            console.log(resdata);
+            let isExist = resdata.filter(item => item.email == values.email);
+            console.log(isExist);
+            if (isExist.length === 0) {
+              let { data } = addContact({
+                userId: "2",
+                firstName: `${values.firstName}`,
+                lastName: `${values.lastName}`,
+                email: `${values.email}`,
+                gender: `${values.gender}`,
+                city: `${values.city}`,
+                createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
+              });
+              action.resetForm();
+              props.confirmModal()
+            }
+          })
+        }
   });
 
   return (

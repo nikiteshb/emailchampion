@@ -1,4 +1,5 @@
 export const DASHBOARD = '/dashboard';
+export const USERDASHBOARD = '/dashboard/:id';
 export const LOGIN = '/';
 export const SIGNUP = '/signup';
 export const USER = '/user/:id';

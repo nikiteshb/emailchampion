@@ -4,12 +4,14 @@ import axios from "axios";
 import { loginSchema } from "../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { getUsers } from "../services/userService";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 const initialValues = {
   email: "",
   password: "",
 };
 const Login = () => {
+  const [show, setShow] = useState(false);
   let navigate = useNavigate(); 
   const {values,errors,handleBlur,handleChange,handleSubmit,touched, isValid, dirty} = useFormik({
     initialValues: initialValues,
@@ -23,16 +25,26 @@ const Login = () => {
             (item.email === values.email) && (item.password === values.password)
           ));
         if (isExist) {
-          navigate(`/user/${isExist[0].id}`);
+          navigate(`/dashboard/${isExist[0].id}`);
         }
-      }).catch((errors)=>{ 
+      }).catch((error)=>{         
+        setShow(true)
+        action.resetForm() 
       });
-
     }
   });
 
   return (
     <>
+      <ToastContainer className={"p-3"} position={"top-end"}>
+        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+            <Toast.Header>
+              <small>Error</small>
+            </Toast.Header>
+            <Toast.Body>"Please Check user Email Id and Password"</Toast.Body>
+          </Toast>
+      </ToastContainer>
+
       <h1 className="text-primary text-center">Login</h1>
       <div className="custom-container mx-auto my-5 p-5 border rounded shadow">
         <form onSubmit={handleSubmit}>
@@ -81,7 +93,7 @@ const Login = () => {
               
             </div>
             <div className="col-12 text-center">
-            <button type="submit" className="btn btn-primary mt-4" disabled={!(isValid && dirty)}>
+                  <button type="submit" className="btn btn-primary mt-4" disabled={!(isValid && dirty)}>
                     Submit
                   </button>
             </div>

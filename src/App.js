@@ -16,17 +16,21 @@ import Certificate from './pages/templates/Certificate';
 import MusicEvent from './pages/templates/MusicEvent';
 import EnergyBill from './pages/templates/EnergyBill';
 import NotFound from './pages/error/NotFound';
-
+ 
 function App() {
+  
   return (
     <>
     <Router> 
       <Header/>
+        
         <div className="container py-5">
+          
           <Routes> 
             <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
-            <Route path={ROUTES.USER} element={<Dashboard />} /> 
+            <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> 
+            <Route path={ROUTES.USERDASHBOARD} element={<Dashboard />} /> 
             <Route path={ROUTES.CONTACTS} element={<ContactList />} /> 
             <Route path={ROUTES.CAMPAIGNS} element={<CampaignsList />} /> 
             <Route path={ROUTES.TEMPLATES} element={<TemplateList />} /> 
