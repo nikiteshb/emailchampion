@@ -18,13 +18,13 @@ function ContactList() {
     getContacts().then((res) => {
       setAllContacts(res.data);
     });
-  },[submitDelete])  
+  },[operationContact])  
   
   function operationContact(contact,type){
     setModalFor(type)
     setCurrContact(contact)
     setModalShow(true)
-    console.log("operation " + ModalFor, CurrContact.id,CurrContact);
+    console.log( ModalFor, CurrContact.id, CurrContact);
   }
 
   function submitDelete(type) {
@@ -97,8 +97,8 @@ function ContactList() {
         contact={CurrContact} >
         {ModalFor === "delete" ? 
         <DeleteModal firstName={CurrContact.firstName} lastName={CurrContact.lastName} /> 
-        : ModalFor === "add" ? <AddEditContact confirmModal={submitContact}/>  
-        : ModalFor === "edit" ? <AddEditContact IsEdit="true"/> :null }
+        : ModalFor === "add" ? <AddEditContact confirmModal={submitContact} />  
+        : ModalFor === "edit" ? <AddEditContact edit="true" contact={CurrContact} confirmModal={updateSubmitContact}/> :null }
        </CustomModal>       
  
     </>

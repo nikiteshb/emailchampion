@@ -1,20 +1,33 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { addContact, getContacts } from "../../services/contactService";
+import { addContact, getContacts, updateContact } from "../../services/contactService";
 import { ContactSchema } from "../../schemas";
-import { getUsers } from "../../services/userService";
-
-let initialValues = {
-  userId: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  gender: "Please Select",
-  city: "",
-  createdAt: "",
-};
+  
+let initialValues
 
 function AddEditContact(props) {
+  if(props.edit == "true"){
+    initialValues= {
+      id:`${props.contact.id}`,
+      userId:`${props.contact.userId}`,
+      firstName:`${props.contact.firstName}`,
+      lastName:`${props.contact.lastName}`,
+      email:`${props.contact.email}`,
+      gender:`${props.contact.gender}`,
+      city:`${props.contact.city}`,
+      createdAt:`${props.contact.createdAt}`
+    }
+  }else{
+    initialValues = {
+      userId: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      gender: "Please Select",
+      city: "",
+      createdAt: "",
+    };  
+  }
   let currDate = new Date(); 
   const {
     values,
@@ -29,14 +42,12 @@ function AddEditContact(props) {
     initialValues: initialValues,
     validationSchema: ContactSchema,
     onSubmit: (values, action) => {       
-      const receivedData = getContacts()
+      getContacts()
           .then(res => {
             const resdata = res.data;
-            console.log(resdata);
             let isExist = resdata.filter(item => item.email == values.email);
-            console.log(isExist);
-            if (isExist.length === 0) {
-              let { data } = addContact({
+            if(props.edit){
+              let {data} = updateContact(props.contact.id,{
                 userId: "2",
                 firstName: `${values.firstName}`,
                 lastName: `${values.lastName}`,
@@ -44,10 +55,25 @@ function AddEditContact(props) {
                 gender: `${values.gender}`,
                 city: `${values.city}`,
                 createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
-              });
+              })
               action.resetForm();
               props.confirmModal()
+            }else{
+              if (isExist.length === 0) {
+                let { data } = addContact({
+                  userId: "2",
+                  firstName: `${values.firstName}`,
+                  lastName: `${values.lastName}`,
+                  email: `${values.email}`,
+                  gender: `${values.gender}`,
+                  city: `${values.city}`,
+                  createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
+                });
+                action.resetForm();
+                props.confirmModal()
+              }
             }
+            
           })
         }
   });
@@ -108,6 +134,7 @@ function AddEditContact(props) {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={props.edit == "true"}
               />
               {errors.email && touched.email ? (
                 <p className="form-error text-danger">{errors.email}</p>
