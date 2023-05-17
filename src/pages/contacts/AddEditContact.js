@@ -57,7 +57,9 @@ function AddEditContact(props) {
                 gender: `${values.gender}`,
                 city: `${values.city}`,
                 createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
-              })              
+              })        
+              action.resetForm();
+              props.confirmModal()        
             }else{
               if (isExist.length === 0) { 
                 let { data } = addContact({
@@ -69,10 +71,12 @@ function AddEditContact(props) {
                   city: `${values.city}`,
                   createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
                 });
+                action.resetForm();
+                props.confirmModal() 
               }
+               
             }
-            action.resetForm();
-            props.confirmModal()            
+                      
           })
         }
   });

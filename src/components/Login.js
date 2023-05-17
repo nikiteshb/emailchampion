@@ -7,6 +7,7 @@ import { getUsers } from "../services/userService";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { login } from "../store/Slices/AuthSlice";
 import { useDispatch } from "react-redux";
+import loginImg from '../assets/images/login_img.png';
 
 const initialValues = {
   email: "",
@@ -56,8 +57,11 @@ const Login = () => {
           </Toast>
       </ToastContainer>
 
-      <h1 className="text-primary text-center">Login</h1>
-      <div className="custom-container mx-auto my-5 p-5 border rounded shadow">
+      <h1 className="text-primary text-center pb-3">Login</h1>
+      <div className="text-center">
+        <img src={loginImg} alt="" className="img-fluid "/>
+      </div>
+      <div className="custom-container mx-auto mb-5 p-5 border rounded shadow">
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-12">

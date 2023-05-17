@@ -78,7 +78,7 @@ function ContactList() {
                     <button type="button" className="btn btn-link" onClick={() => operationContact(contact,"edit")}>
                       <MdMode />
                     </button>
-                    <button type="button" className="btn btn-link" onClick={() => operationContact(contact,"delete")}>
+                    <button type="button" className="btn btn-link text-danger" onClick={() => operationContact(contact,"delete")}>
                     <MdOutlineDelete/>
                     </button>
                     </td>

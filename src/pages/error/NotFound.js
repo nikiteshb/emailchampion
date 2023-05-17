@@ -1,10 +1,14 @@
 import React from 'react'
+import image404 from '../../assets/images/404.png';
+import { Link } from 'react-router-dom';
 
 function NotFound() {
   return (
     <>
-         <h1>404 Error</h1>
-        <h1>Page Not Found</h1>
+        <div className="row">
+          <div className="col-lg-6 mx-auto text-center"><img src={image404} className='img-fluid' /><Link to="/" className='btn btn-primary'>Return Home</Link></div>
+          
+        </div>
     </>
   )
 }

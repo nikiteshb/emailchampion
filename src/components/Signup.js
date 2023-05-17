@@ -4,6 +4,7 @@ import { signupSchema } from "../schemas";
 import axios from "axios";
 import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import {addUser,getUsers} from "../services/userService";
+import signupImg from '../assets/images/signup_img.png';
 
 const initialValues = {
   name: "",
@@ -43,8 +44,11 @@ const Signup = () => {
 
   return (
     <>
-      <h1 className="text-primary text-center">Signup</h1>
-      <div className="custom-container mx-auto my-5 p-5 border rounded shadow">
+      <h1 className="text-primary text-center pb-3">Signup</h1>
+      <div className="text-center">
+        <img src={signupImg} alt="" className="img-fluid "/>
+      </div>
+      <div className="custom-container mx-auto mb-5 p-5 border rounded shadow">
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-lg-6">
