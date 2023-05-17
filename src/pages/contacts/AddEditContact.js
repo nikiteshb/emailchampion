@@ -2,10 +2,12 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { addContact, getContacts, updateContact } from "../../services/contactService";
 import { ContactSchema } from "../../schemas";
+import { useSelector } from "react-redux";
   
 let initialValues
 
 function AddEditContact(props) {
+  let loggedinuser = useSelector((state) => state.auth)
   if(props.edit == "true"){
     initialValues= {
       id:`${props.contact.id}`,
@@ -45,23 +47,21 @@ function AddEditContact(props) {
       getContacts()
           .then(res => {
             const resdata = res.data;
-            let isExist = resdata.filter(item => item.email == values.email);
-            if(props.edit){
+            let isExist = resdata.filter(item => item.email == values.email && loggedinuser.userid == item.userId);
+            if(props.edit){ 
               let {data} = updateContact(props.contact.id,{
-                userId: "2",
+                userId: `${loggedinuser.userid}`,
                 firstName: `${values.firstName}`,
                 lastName: `${values.lastName}`,
                 email: `${values.email}`,
                 gender: `${values.gender}`,
                 city: `${values.city}`,
                 createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
-              })
-              action.resetForm();
-              props.confirmModal()
+              })              
             }else{
-              if (isExist.length === 0) {
+              if (isExist.length === 0) { 
                 let { data } = addContact({
-                  userId: "2",
+                  userId: `${loggedinuser.userid}`,
                   firstName: `${values.firstName}`,
                   lastName: `${values.lastName}`,
                   email: `${values.email}`,
@@ -69,11 +69,10 @@ function AddEditContact(props) {
                   city: `${values.city}`,
                   createdAt: `${currDate.getDate() + "/" + (currDate.getMonth() + 1) + "/" + currDate.getFullYear()}`
                 });
-                action.resetForm();
-                props.confirmModal()
               }
             }
-            
+            action.resetForm();
+            props.confirmModal()            
           })
         }
   });

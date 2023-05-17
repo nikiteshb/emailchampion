@@ -5,12 +5,19 @@ import { loginSchema } from "../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { getUsers } from "../services/userService";
 import { Toast, ToastContainer } from "react-bootstrap";
+import { login } from "../store/Slices/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const initialValues = {
   email: "",
   password: "",
 };
+
+ 
 const Login = () => {
+
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
   let navigate = useNavigate(); 
   const {values,errors,handleBlur,handleChange,handleSubmit,touched, isValid, dirty} = useFormik({
@@ -25,7 +32,11 @@ const Login = () => {
             (item.email === values.email) && (item.password === values.password)
           ));
         if (isExist) {
+          
           navigate(`/dashboard/${isExist[0].id}`);
+           let curruser = isExist[0]
+            dispatch(login(curruser))
+
         }
       }).catch((error)=>{         
         setShow(true)
@@ -56,7 +67,6 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  autoComplete="off"
                   name="email"
                   id="email"
                   className="form-control"
@@ -76,7 +86,6 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  autoComplete="off"
                   name="password"
                   id="password"
                   className="form-control"

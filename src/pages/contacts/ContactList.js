@@ -5,6 +5,7 @@ import AddEditContact from "./AddEditContact";
 import {addContact, deleteContact, getContacts } from "../../services/contactService"; 
 import CustomModal from "../../modals/CustomModal";
 import DeleteModal from "../../modals/DeleteModal";
+import { useSelector } from "react-redux";
 
   
 function ContactList() {
@@ -12,11 +13,12 @@ function ContactList() {
   const [ModalShow,setModalShow]= useState(false)
   const [CurrContact,setCurrContact] = useState("")
   let [ModalFor,setModalFor]= useState("")
- 
-
+  let loggedinuser = useSelector((state) => state.auth)
+  
   useEffect(() =>{
     getContacts().then((res) => {
-      setAllContacts(res.data);
+      let contacts = res.data.filter(u => u.userId == loggedinuser.userid);
+      setAllContacts(contacts);
     });
   },[operationContact])  
   
@@ -103,6 +105,6 @@ function ContactList() {
  
     </>
   );
-}
+} 
 
 export default ContactList;

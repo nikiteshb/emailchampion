@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getContacts } from '../../services/contactService';
 import { getCampaigns } from '../../services/campaignService';
+import { useSelector } from 'react-redux';
 
 function Dashboard() {
+    const loggedinuser = useSelector((state) => state.auth)
+    
     let params = useParams();
 
     let [RelativeContacts,setRelativeContacts] = useState("")
     let [RelativeCampaigns,setRelativeCampaigns] = useState("")
     useEffect(() =>{
         getContacts().then((res) => {
-            let contacts = res.data.filter((g) => g.userId == 2);
+            let contacts = res.data.filter((g) => g.contactId == loggedinuser.id);
             setRelativeContacts(contacts);
           });
       
