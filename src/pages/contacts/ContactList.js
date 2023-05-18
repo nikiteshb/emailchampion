@@ -3,7 +3,7 @@ import { MdMode, MdOutlineDelete } from "react-icons/md";
 
 import AddEditContact from "./AddEditContact";
 import {addContact, deleteContact, getContacts } from "../../services/contactService"; 
-import CustomModal from "../../modals/CustomModal";
+import ContactModal from "../../modals/ContactModal";
 import DeleteModal from "../../modals/DeleteModal";
 import { useSelector } from "react-redux";
 
@@ -20,13 +20,14 @@ function ContactList() {
       let contacts = res.data.filter(u => u.userId == loggedinuser.userid);
       setAllContacts(contacts);
     });
-  },[operationContact])  
+  },[ModalFor])  
   
   function operationContact(contact,type){
     setModalFor(type)
     setCurrContact(contact)
     setModalShow(true)
     console.log( ModalFor, CurrContact.id, CurrContact);
+    
   }
 
   function submitDelete(type) {
@@ -92,7 +93,7 @@ function ContactList() {
 
       {/* <AddEditContact /> */}
               
-       <CustomModal show={ModalShow}
+       <ContactModal show={ModalShow}
         onHide={() => setModalShow(false)}
         confirmModal={ModalFor === "add" ? submitContact : ModalFor === "delete" ? submitDelete : ModalFor === "edit" ? updateSubmitContact : null}
         dialogClassName={ModalFor}
@@ -101,7 +102,7 @@ function ContactList() {
         <DeleteModal firstName={CurrContact.firstName} lastName={CurrContact.lastName} /> 
         : ModalFor === "add" ? <AddEditContact confirmModal={submitContact} />  
         : ModalFor === "edit" ? <AddEditContact edit="true" contact={CurrContact} confirmModal={updateSubmitContact}/> :null }
-       </CustomModal>       
+       </ContactModal>       
  
     </>
   );

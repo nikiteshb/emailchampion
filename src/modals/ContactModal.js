@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import React from 'react'
 import { Modal } from 'react-bootstrap'
  
-function CustomModal(props) {
+function ContactModal(props) {
     
   return (
      <>
@@ -33,4 +33,4 @@ function CustomModal(props) {
   )
 }
 
-export default CustomModal
+export default ContactModal

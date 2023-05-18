@@ -84,7 +84,7 @@ function AddEditContact(props) {
   return (
     <>
       <form onSubmit={handleSubmit} id="addEditForm">
-        <h1>{props.IsEdit ? "Edit User" : "Add User"}</h1>
+        <h1>{props.edit ? "Edit User" : "Add User"}</h1>
         <div className="row">
           <div className="col-lg-6 mb-3">
             <div className="form-group">

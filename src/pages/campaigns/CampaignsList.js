@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdDirectionsRun, MdMode, MdOutlineDelete } from "react-icons/md";
+import { getCampaigns } from "../../services/campaignService";
 
 function CampaignsList() {
+  const [RelatedCampaigns,setRelatedCampaigns]  = useState([])
+  useEffect(() =>{
+    let allContacts = getCampaigns().then((res) => setRelatedCampaigns(res.data))
+    console.log(RelatedCampaigns);
+  })
   return (
     <>
       <div className="row">
@@ -25,45 +31,32 @@ function CampaignsList() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">Studio Certificates Jun 2023</th>
-              <td>Basic of something</td>
-              <td>30</td>
-              <td>Nikitesh Bhadade</td>
-              <td>
-                <span className="badge bg-success p-2">Sent</span>
-              </td>
-              <td>Certficate</td>
-              <td>
-                <MdDirectionsRun /> <MdMode /> <MdOutlineDelete />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Studio Certificates Jun 2023</th>
-              <td>Basic of something</td>
-              <td>30</td>
-              <td>Nikitesh Bhadade</td>
-              <td>
-                <span className="badge bg-success p-2">Sent</span>
-              </td>
-              <td>Certficate</td>
-              <td>
-                <MdDirectionsRun /> <MdMode /> <MdOutlineDelete />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Studio Certificates Jun 2023</th>
-              <td>Basic of something</td>
-              <td>30</td>
-              <td>Nikitesh Bhadade</td>
-              <td>
-                <span className="badge bg-success p-2">Sent</span>
-              </td>
-              <td>Certficate</td>
-              <td>
-                <MdDirectionsRun /> <MdMode /> <MdOutlineDelete />
-              </td>
-            </tr>
+            {RelatedCampaigns.map(campaign => (
+              <tr>
+                <td>
+                  {campaign.name}
+                </td>
+                <td>
+                  {campaign.subject}
+                </td>
+                <td>
+                  Recipients
+                </td>
+                <td>
+                <span className="badge bg-warning p-2">{campaign.status}</span>
+                  
+                </td>
+                <td>
+                  {campaign.id}
+                </td>
+                <td>
+                  {campaign.template.name}
+                </td>
+                <td>
+                  <MdDirectionsRun /> <MdMode /> <MdOutlineDelete />
+                </td>
+              </tr>
+            ))} 
           </tbody>
         </table>
       </div>
