@@ -48,7 +48,7 @@ function Dashboard() {
                 <div className="card bg-white"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Templates</h5>
-                    <h2 className="display-4">45</h2>
+                    <h2 className="display-4">3</h2>
                     <Link className="btn btn-primary btn-sm mt-3" to={"/templates"}>View all templates</Link>
                 </div>
                 </div>

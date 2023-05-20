@@ -30,7 +30,7 @@ function App() {
           <Routes> 
             <Route path={ROUTES.LOGIN} exact element={<Login />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
-            <Route element={<ProtectedRoutes />}>
+            {/* <Route element={<ProtectedRoutes />}> */}
              <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />  
               <Route path={ROUTES.USERDASHBOARD} element={<Dashboard />} /> 
               <Route path={ROUTES.CONTACTS} element={<ContactList />} /> 
@@ -39,8 +39,8 @@ function App() {
               <Route path={ROUTES.CERTIFICATE} element={<Certificate />} /> 
               <Route path={ROUTES.MUSICEVENT} element={<MusicEvent/>} />
               <Route path={ROUTES.ENERGYBILL} element={<EnergyBill/>} />
-            </Route>
-            <Route path="*" element={<NotFound/>} />
+            {/* </Route> */}
+            {/* <Route path="*" element={<NotFound/>} /> */}
           </Routes>  
         </div>
       <Footer/>
