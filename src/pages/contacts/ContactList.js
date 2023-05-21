@@ -99,7 +99,7 @@ function ContactList() {
         dialogClassName={ModalFor}
         contact={CurrContact} >
         {ModalFor === "delete" ? 
-        <DeleteModal firstName={CurrContact.firstName} lastName={CurrContact.lastName} /> 
+        <DeleteModal name="Contact" /> 
         : ModalFor === "add" ? <AddEditContact confirmModal={submitContact} />  
         : ModalFor === "edit" ? <AddEditContact edit="true" contact={CurrContact} confirmModal={updateSubmitContact}/> :null }
        </ContactModal>       

@@ -37,7 +37,7 @@ const AddEditCampaign = (props) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={(values, action) => {
-      console.log(values.template)
+      // console.log(values.template)
       let templatevars
       if(values.template == "energy"){
         templatevars = {
@@ -71,10 +71,12 @@ const AddEditCampaign = (props) => {
         template: {
           name: `${values.template}`,
         },
-        template_vars: {templatevars},
+        template_vars: templatevars,
         contacts: `${values.selectedContacts}`,
         userId: "2",
-      }).then((res) => console.log(res.data.template));
+      })
+      action.resetForm();
+      props.onHide()
     } }>
       {({
          values,

@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { MdDirectionsRun, MdMode, MdOutlineDelete } from "react-icons/md";
-import { getCampaigns } from "../../services/campaignService";
+import { MdDirectionsRun, MdMode, MdOutlineDelete, MdPlayArrow } from "react-icons/md";
+import { deleteCampaign, getCampaigns } from "../../services/campaignService";
 import CampaignModal from "../../modals/CampaignModal";
 import AddEditCampaign from "./AddEditCampaign";
 import { getContacts } from "../../services/contactService";
 import { useSelector } from "react-redux";
-
+import DeleteCampaignModal from "../../modals/DeleteCampaignModal";
+ 
 function CampaignsList() {
   const [modalShow, setModalShow] = useState(false);
-
+  const [delModalShow, setDelModalShow] = useState(false);
   const [relatedCampaigns,setRelatedCampaigns]  = useState([])
+  const [currCampaign,setCurrCampaign] = useState({})
   let userData =  useSelector((state) => state.user.data)
-  console.log(userData);
+  const deleteCurrContact = (campaign) =>{
+    setCurrCampaign(campaign)
+    setDelModalShow(true)
+  }
   useEffect(() =>{
-    
-    getContacts().then((res) => console.log(res.data))
     getCampaigns().then((res) => setRelatedCampaigns(res.data))
-    
-  },[ ]) 
+  },[])
+
   return (
     <>
       <div className="row">
@@ -65,7 +68,10 @@ function CampaignsList() {
                   {campaign.template.name}
                 </td>
                 <td>
-                  <MdDirectionsRun /> <MdMode /> <MdOutlineDelete />
+                  <MdDirectionsRun />
+                  <MdPlayArrow />
+                  <MdMode /> 
+                  <MdOutlineDelete onClick={() => deleteCurrContact(campaign)}/>
                 </td>
               </tr>
             ))} 
@@ -74,7 +80,8 @@ function CampaignsList() {
       </div>
       <CampaignModal show={modalShow} onHide={() => setModalShow(false)} title = "Add Campaign">
         <AddEditCampaign onHide={() => setModalShow(false)}/>
-      </CampaignModal>
+      </CampaignModal> 
+      <DeleteCampaignModal show={delModalShow} onHide={() => setDelModalShow(false)} name="campaign" currCampaign={currCampaign}/> 
 
     </>
   );
