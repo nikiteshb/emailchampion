@@ -9,12 +9,12 @@ function CampaignModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{props.children}</Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
             <button className='btn btn-primary' onClick={props.onHide}>Cancel</button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   )

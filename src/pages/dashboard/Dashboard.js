@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getContacts } from '../../services/contactService';
 import { getCampaigns } from '../../services/campaignService';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { user } from '../../store/Slices/UserSlice';
 
 function Dashboard() {
     const loggedinuser = useSelector((state) => state.auth)
@@ -11,16 +12,18 @@ function Dashboard() {
 
     let [RelativeContacts,setRelativeContacts] = useState("")
     let [RelativeCampaigns,setRelativeCampaigns] = useState("")
+    let dispatch = useDispatch()
     useEffect(() =>{
         getContacts().then((res) => {
             let contacts = res.data.filter((g) => g.userId == loggedinuser.userid);
             setRelativeContacts(contacts);
+            dispatch(user(RelativeContacts))
           });
       
           getCampaigns().then((res) => {
             setRelativeCampaigns(res.data);
           });
-    },[])
+    },[RelativeContacts,dispatch,loggedinuser.userid])
 
   return (
     <>

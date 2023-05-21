@@ -3,21 +3,30 @@ import { MdDirectionsRun, MdMode, MdOutlineDelete } from "react-icons/md";
 import { getCampaigns } from "../../services/campaignService";
 import CampaignModal from "../../modals/CampaignModal";
 import AddEditCampaign from "./AddEditCampaign";
+import { getContacts } from "../../services/contactService";
+import { useSelector } from "react-redux";
 
 function CampaignsList() {
   const [modalShow, setModalShow] = useState(false);
-  const [RelatedCampaigns,setRelatedCampaigns]  = useState([])
+
+  const [relatedCampaigns,setRelatedCampaigns]  = useState([])
+  let userData =  useSelector((state) => state.user.data)
+  console.log(userData);
   useEffect(() =>{
-    let allContacts = getCampaigns().then((res) => setRelatedCampaigns(res.data))
-    console.log(RelatedCampaigns);
+    
+    getContacts().then((res) => console.log(res.data))
+    getCampaigns().then((res) => setRelatedCampaigns(res.data))
+    
   },[ ]) 
   return (
     <>
       <div className="row">
-        <div className="col-12 pb-4 text-end">
-          <button type="submit" className="btn btn-primary mt-4" onClick={()=> setModalShow(true)} >
+        <div className="col-12 pb-4 text-end"> 
+        {userData.length == 0 ? <p className="text-danger fw-bold">Please add Atleast 1 Contact to create Campaign</p> 
+        : <button type="submit" className="btn btn-primary mt-4" onClick={()=> setModalShow(true)} >
             New Campaign
-          </button>
+          </button> }
+
         </div>
       </div>
       <div className="table-responsive">
@@ -34,7 +43,7 @@ function CampaignsList() {
             </tr>
           </thead>
           <tbody>
-            {RelatedCampaigns.map(campaign => (
+            {relatedCampaigns.map(campaign => (
               <tr key={campaign.id}>
                 <td>
                   {campaign.name}
@@ -63,11 +72,10 @@ function CampaignsList() {
           </tbody>
         </table>
       </div>
-      <CampaignModal show={modalShow} onHide={() => setModalShow(false)}>
-              campaign
+      <CampaignModal show={modalShow} onHide={() => setModalShow(false)} title = "Add Campaign">
+        <AddEditCampaign onHide={() => setModalShow(false)}/>
       </CampaignModal>
 
-      <AddEditCampaign/>
     </>
   );
 }

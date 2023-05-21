@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { addCampaign } from "../../services/campaignService";
 import { useSelector } from "react-redux";
 import { getContacts } from "../../services/contactService";
+
 const initialValues = {
   name: "",
   subject: "",
@@ -10,23 +11,16 @@ const initialValues = {
   template: {
     name: "",
   },
-  template_vars: {
-    corporation_name: "",
-    month: "",
-    Year: "",
-    bill_amount: "",
-  },
+  template_vars: {},
   contacts: [],
   userId: "1",
 };
 
 const templateRadioOptions = [
-  { value: "energy", label: "energy" },
-  { value: "certificate", label: "certificate" },
-  { value: "music", label: "music" },
+  { value: "energy", label: "Energy Bill" },
+  { value: "certificate", label: "Certificate" },
+  { value: "music", label: "Musical Night Invitation" },
 ];
-
-
 
 
 const AddEditCampaign = (props) => {
@@ -42,7 +36,33 @@ const AddEditCampaign = (props) => {
   },[])  
 
   return (
-    <Formik initialValues={initialValues} onSubmit={ (values, action) => {
+    <Formik initialValues={initialValues} onSubmit={(values, action) => {
+      console.log(values.template)
+      let templatevars
+      if(values.template == "energy"){
+        templatevars = {
+          corporation_name: `${values.corporationName}`,
+          month: `${values.month}`,
+          year: `${values.year}`,
+          bill_amount: `${values.billAmount}`
+          }
+      }else if(values.template == "certificate"){
+        templatevars = {
+          issuer: `${values.issuer}`,
+          hours: `${values.hours}`,
+          courseName: `${values.courseName}`,
+          }
+      }else if(values.template == "music"){
+        templatevars = {
+          bandName: `${values.bandName}`,
+          venue: `${values.venue}`,
+          eventDate: `${values.eventDate}`,
+          eventTime: `${values.eventTime}`,
+          }
+      }else{
+        templatevars = null
+      }
+
       let { data } = addCampaign({
         userId: "1",
         name: `${values.name}`,
@@ -51,12 +71,7 @@ const AddEditCampaign = (props) => {
         template: {
           name: `${values.template}`,
         },
-        template_vars: {
-          corporation_name: `${values.corporationName}`,
-          month: `${values.month}`,
-          Year: `${values.year}`,
-          bill_amount: `${values.billAmount}`,
-        },
+        template_vars: {templatevars},
         contacts: `${values.selectedContacts}`,
         userId: "2",
       }).then((res) => console.log(res.data.template));
@@ -72,7 +87,6 @@ const AddEditCampaign = (props) => {
          /* and other goodies */
        }) =>(
         <form id="addEditCampaign" onSubmit={handleSubmit}>
-        <h1>Add Campaign</h1>
         <div className="row">
           <div className="form-group col-lg-6 mb-3">
             <label className="mb-2 fw-bold">Campaign Name</label>
@@ -238,7 +252,7 @@ const AddEditCampaign = (props) => {
                     <label className="mb-2 fw-bold">Event Date</label>
                     <Field
                       name="eventDate"
-                      type="text"
+                      type="date"
                       className="form-control"
                       value={values.eventDate}
                       onChange={handleChange}
@@ -249,7 +263,7 @@ const AddEditCampaign = (props) => {
                     <label className="mb-2 fw-bold">Event Time</label>
                     <Field
                       name="eventTime"
-                      type="text"
+                      type="time"
                       className="form-control"
                       value={values.eventTime}
                       onChange={handleChange}
@@ -282,9 +296,13 @@ const AddEditCampaign = (props) => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <div className="text-end">
+        <hr />
+        <button type="submit" className="btn btn-primary me-3">
           Submit
         </button>
+        <button className='btn btn-primary' onClick={props.onHide}>Cancel</button>
+        </div>
       </form>
       )}
     </Formik>
