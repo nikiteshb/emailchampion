@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getContacts } from '../../services/contactService';
-import { getCampaigns } from '../../services/campaignService';
+import { getCampaign, getCampaigns } from '../../services/campaignService';
 import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../../store/Slices/UserSlice';
 
@@ -23,8 +23,11 @@ function Dashboard() {
           getCampaigns().then((res) => {
             setRelativeCampaigns(res.data);
           });
+          
     },[RelativeContacts])
     // console.log(RelativeContacts);
+
+   
   return (
     <>
         <div className="container">

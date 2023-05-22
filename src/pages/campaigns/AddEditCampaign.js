@@ -37,7 +37,7 @@ const AddEditCampaign = (props) => {
   },[])  
 
   return (
-    <Formik initialValues={initialValues}   onSubmit={(values, action) => {
+    <Formik initialValues={initialValues}  validationSchema={CampaignSchema} onSubmit={(values, action) => {
       // console.log(values.template)
       let templatevars
       if(values.template == "energy"){
@@ -63,7 +63,9 @@ const AddEditCampaign = (props) => {
       }else{
         templatevars = null
       }
+      // if(template.name == ""){
 
+      // }
       let { data } = addCampaign({
         userid: `${loggedinuser.userid}`,
         name: `${values.name}`,
@@ -86,6 +88,7 @@ const AddEditCampaign = (props) => {
          handleBlur,
          handleSubmit,
          isSubmitting,
+         dirty
          /* and other goodies */
        }) =>(
         <form id="addEditCampaign" onSubmit={handleSubmit} >
@@ -138,8 +141,9 @@ const AddEditCampaign = (props) => {
                 </label>
               </div>
             ))}
+            
             {errors.template && touched.template ? (<p className="form-error text-danger">{errors.template}</p>
-              ) : null}
+              ) : !touched.template ? (<p className="form-error text-danger">"Please Select Template"</p>) :null}
           </div>
           <div className="col-lg-6 mb-3">
             {values.template == "energy" ? (
@@ -154,7 +158,7 @@ const AddEditCampaign = (props) => {
                       value={values.corporationName}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                    />
+                    />                    
                     {errors.corporationName && touched.corporationName ? (<p className="form-error text-danger">{errors.corporationName}</p>
                     ) : null}
                   </div>
@@ -331,7 +335,7 @@ const AddEditCampaign = (props) => {
         <button type="submit" className="btn btn-primary me-3">
           Submit
         </button>
-        <button type="submit" className='btn btn-primary' onClick={props.onHide}>Cancel</button>
+        <button className='btn btn-primary' onClick={props.onHide}>Cancel</button>
         </div>
       </form>
       )}

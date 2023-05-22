@@ -6,7 +6,7 @@ function NotFound() {
   return (
     <>
         <div className="row">
-          <div className="col-lg-6 mx-auto text-center"><img src={image404} className='img-fluid' /><Link to="/" className='btn btn-primary'>Return Home</Link></div>
+          <div className="col-lg-6 mx-auto text-center"><img src={image404} alt="not found" className='img-fluid' /><Link to="/" className='btn btn-primary'>Return Home</Link></div>
           
         </div>
     </>

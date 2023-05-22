@@ -8,37 +8,22 @@ import { useSelector } from 'react-redux'
 function Campaign() {
   const {id} = useParams()
 
-  const loggedinuser = useSelector((state) => state.auth)
+  const [campaigns,setCampaigns] = useState()
+  const [reContacts,setReContacts] = useState([""])
 
-  const [relatedContacts,setRelatedContacts] = useState([""])
-  const [relatedCampaignContacts,setRelatedCampaignContacts] = useState([""])
-  const [finalContacts,setFinalContacts] = useState([""])
-  const [currCampaign,setCurrCampaign] = useState([""])
   useEffect(() =>{
-     getCampaign(id).then((curcamp) => (setCurrCampaign(curcamp.data)))
-     getCampaign(id).then(res => setRelatedCampaignContacts(res.data.contacts))
-     getContacts().then(con => setRelatedContacts(con.data.filter((user) => user.userId == loggedinuser.userid )))
-     setFinalContacts(relatedContacts.filter((contact) => relatedCampaignContacts.includes(`${contact.id}`)))
-    
-     //  getContacts().then(con => console.log(con.data))
-    // console.log("related ccc", relatedCampaignContacts)
-    // console.log("related", relatedContacts)
-
-    // console.log("final" ,relatedContacts.filter((contact) => relatedCampaignContacts.includes(`${contact.id}`)));
-    // users.filter(user => userIDsToFilter.includes(user.id.toString()));
-    // console.log("currCampaign", currCampaign)
-
-  },[id])
-  
+      getCampaign(id).then(res => setCampaigns(res))
+  },[ ])
+  // {campaigns.contactObj}
   return (
     <>
-      {finalContacts.map(certificate => (
-        
-        <Certificate key={certificate.id} issuer="institure" hours="1000" course="course" contactName={`${certificate.firstName} ${certificate.lastName}`}/>
-      ))}
+    
+      {/* {campaigns.contactObj.map(contact => <Certificate key={contact.id} contact={contact} />)} */}
+      {/* {campaigns.contactObj.map((campaign) => <Certificate key={campaign.id} contact={campaign}/>)} */}
       
     </>
   )
 }
+
 
 export default Campaign

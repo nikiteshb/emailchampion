@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MdDirectionsRun, MdMode, MdOutlineDelete, MdPlayArrow } from "react-icons/md";
-import { deleteCampaign, getCampaigns } from "../../services/campaignService";
+import { MdDirectionsRun, MdMode, MdOutlineDelete } from "react-icons/md";
+import { deleteCampaign, getCampaign, getCampaigns } from "../../services/campaignService";
 import CampaignModal from "../../modals/CampaignModal";
 import AddEditCampaign from "./AddEditCampaign";
 import { getContacts } from "../../services/contactService";
@@ -20,13 +20,13 @@ function CampaignsList() {
   }
   useEffect(() =>{
     getCampaigns().then((res) => setRelatedCampaigns(res.data))
-  },[])
+  },[delModalShow])
 
  const previewCampaign = (campaign) => {
     console.log(campaign.id)
     Link(`/campaigns/${campaign.id}`)
   }
-  console.log("add edit  cam",userData);
+  
   return (
     <>
       <div className="row">
@@ -66,7 +66,6 @@ function CampaignsList() {
                 </td>
                 <td>
                 <span className="badge bg-warning p-2">{campaign.status}</span>
-                  
                 </td>
                 <td>
                   {campaign.id}
@@ -75,11 +74,8 @@ function CampaignsList() {
                   {campaign.template.name}
                 </td>
                 <td>
-                <Link type="button" className="btn btn-link text-info" >
-                <MdDirectionsRun />
-                </Link>
                 <Link to={`/campaigns/${campaign.id}`} className="btn btn-link text-success" >
-                <MdPlayArrow />
+                  <MdDirectionsRun />
                 </Link>
                   <Link type="button" className="btn btn-link text-primary" >
                 <MdMode /> 

@@ -24,32 +24,37 @@ const ContactSchema = Yup.object({
       city: Yup.string().min(2).max(30).required("Please Select City"),
 })
 
-// const CampaignSchema = Yup.object({
-//     name: Yup.string().min(2).max(30).required("Please enter Name"),
-//     subject: Yup.string().min(2).max(30).required("Please enter Subject"),
-//     template: Yup.object().when('template',{
-//         is:'energy',
-//         then: Yup.object({
-//             corporationName:Yup.string().min(2).max(30).required("Please enter Name"),
-//             billAmount:Yup.number().required("Please enter Bill amount"),
-//             month:Yup.string().min(2).max(20).required("Please enter month"),
-//             year:Yup.number().min(2).max(20).required("Please enter year"),
-//         }),
-//         is:'certificate',
-//         then:Yup.object({
-//             issuer:Yup.string().min(2).max(30).required("Please enter Issuer"),
-//             hours:Yup.number().required("Please enter hours"),
-//             courseName:Yup.string().min(2).max(30).required("Please enter course name"),
-//         }),
-//         is:'music',
-//         then:Yup.object({
-//             bandName:Yup.string().min(2).max(30).required("Please enter band name"),
-//             venue:Yup.string().min(2).max(30).required("Please enter venue"),
-//             eventDate:Yup.date().min(new Date(), "Cannot be in the past Date"),
-//             eventTime:Yup.string().required("Please enter Time"),
-//         })
-//     }),
-//     contacts:Yup.array().required("At least one checkbox is required"),
-// })
+const CampaignSchema = Yup.object({
+    name: Yup.string().min(2).max(30).required("Please enter Name"),
+    subject: Yup.string().min(2).max(30).required("Please enter Subject"),
+    // template: Yup.string().required('template is required'),
+    template_vars: Yup.object()
+    .when('template.name',{
+        is:'energy',
+        then: Yup.object({
+            corporationName:Yup.string().min(2).max(30).required("Please enter Name"),
+            billAmount:Yup.number().required("Please enter Bill amount"),
+            month:Yup.string().min(2).max(20).required("Please enter month"),
+            year:Yup.number().min(2).max(20).required("Please enter year"),
+        }),
+    })
+    .when('template.name',{
+        is:'certificate',
+        then:Yup.object({
+            issuer:Yup.string().min(2).max(30).required("Please enter Issuer"),
+            hours:Yup.number().required("Please enter hours"),
+            courseName:Yup.string().min(2).max(30).required("Please enter course name"),
+        }),
+    })
+    .when('template.name',{
+        is:'music',
+        then:Yup.object({
+            bandName:Yup.string().min(2).max(30).required("Please enter band name"),
+            venue:Yup.string().min(2).max(30).required("Please enter venue"),
+            eventDate:Yup.date().min(new Date(), "Cannot be in the past Date"),
+            eventTime:Yup.string().required("Please enter Time"),
+        })
+    }),
+})
 
-export {signupSchema,loginSchema,ContactSchema} 
+export {signupSchema,loginSchema,ContactSchema,CampaignSchema} 

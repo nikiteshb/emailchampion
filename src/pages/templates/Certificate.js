@@ -2,29 +2,12 @@ import React from 'react'
 function Certificate(props) {
   return (
     <>
-        {/* {relatedCampaigns.map((campaign) =>{
-                <div className="certificate my-3 p-5 text-center">
-                        <h6 className='fw-bold'>{campaign.name}</h6>
-                        <h1 className='pb-5'>{campaign.subject}</h1>
-                        <p>This is to Certify that</p>
-                        <h3 className='name pb-5'>Nikitesh Bhadade</h3>
-                        <p>has successfully completed the 50 hours certification course in Progressive Web Apps.</p>
-                </div>
-        })} */}
-        {/* <div className="certificate my-3 p-5 text-center">
-                <h6 className='fw-bold'>UI Studio, Globant</h6>
-                <h1 className='pb-5'>Certificate of Completion</h1>
-                <p>This is to Certify that</p>
-                <h3 className='name pb-5'>Nikitesh Bhadade</h3>
-                <p>has successfully completed the 50 hours certification course in Progressive Web Apps.</p>
-        </div> */}
-
         <div className="certificate my-3 p-5 text-center">
-                <h6 className='fw-bold'>{props.issuer}</h6>
+                <h6 className='fw-bold'>"Indian Institute"</h6>
                 <h1 className='pb-5'>Certificate of Completion</h1>
                 <p>This is to Certify that</p>
-                <h3 className='name pb-5'>{props.contactName}</h3>
-                <p>has successfully completed the {props.hours} hours certification course in {props.course}.</p>
+                <h3 className='name pb-5'>{props.contact.firstName} {props.contact.lastName}</h3>
+                <p>has successfully completed the 1000 hours certification course in  Developer.</p>
         </div>
     </>
   )
