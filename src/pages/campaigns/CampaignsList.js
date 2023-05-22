@@ -6,13 +6,14 @@ import AddEditCampaign from "./AddEditCampaign";
 import { getContacts } from "../../services/contactService";
 import { useSelector } from "react-redux";
 import DeleteCampaignModal from "../../modals/DeleteCampaignModal";
+import { Link, Navigate } from "react-router-dom";
  
 function CampaignsList() {
   const [modalShow, setModalShow] = useState(false);
   const [delModalShow, setDelModalShow] = useState(false);
   const [relatedCampaigns,setRelatedCampaigns]  = useState([])
   const [currCampaign,setCurrCampaign] = useState({})
-  let userData =  useSelector((state) => state.user.data)
+  const userData =  useSelector((state) => state.user.data)
   const deleteCurrContact = (campaign) =>{
     setCurrCampaign(campaign)
     setDelModalShow(true)
@@ -21,6 +22,11 @@ function CampaignsList() {
     getCampaigns().then((res) => setRelatedCampaigns(res.data))
   },[])
 
+ const previewCampaign = (campaign) => {
+    console.log(campaign.id)
+    Link(`/campaigns/${campaign.id}`)
+  }
+  console.log("add edit  cam",userData);
   return (
     <>
       <div className="row">
@@ -47,6 +53,7 @@ function CampaignsList() {
           </thead>
           <tbody>
             {relatedCampaigns.map(campaign => (
+              
               <tr key={campaign.id}>
                 <td>
                   {campaign.name}
@@ -55,7 +62,7 @@ function CampaignsList() {
                   {campaign.subject}
                 </td>
                 <td>
-                  {campaign.contacts.length}
+                  {campaign.contacts?.length }
                 </td>
                 <td>
                 <span className="badge bg-warning p-2">{campaign.status}</span>
@@ -68,10 +75,18 @@ function CampaignsList() {
                   {campaign.template.name}
                 </td>
                 <td>
-                  <MdDirectionsRun />
-                  <MdPlayArrow />
-                  <MdMode /> 
-                  <MdOutlineDelete onClick={() => deleteCurrContact(campaign)}/>
+                <Link type="button" className="btn btn-link text-info" >
+                <MdDirectionsRun />
+                </Link>
+                <Link to={`/campaigns/${campaign.id}`} className="btn btn-link text-success" >
+                <MdPlayArrow />
+                </Link>
+                  <Link type="button" className="btn btn-link text-primary" >
+                <MdMode /> 
+                </Link>
+                <Link type="button" className="btn btn-link text-danger" onClick={() => deleteCurrContact(campaign)}>
+                  <MdOutlineDelete />
+                </Link>
                 </td>
               </tr>
             ))} 

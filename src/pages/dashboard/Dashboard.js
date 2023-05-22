@@ -23,8 +23,8 @@ function Dashboard() {
           getCampaigns().then((res) => {
             setRelativeCampaigns(res.data);
           });
-    },[RelativeContacts,dispatch,loggedinuser.userid])
-
+    },[RelativeContacts])
+    // console.log(RelativeContacts);
   return (
     <>
         <div className="container">

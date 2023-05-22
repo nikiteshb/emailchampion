@@ -6,6 +6,7 @@ export const USER = '/user/:id';
 export const NOT_FOUND ='/not-found';
 export const CONTACTS = '/contacts';
 export const CAMPAIGNS ='/campaigns';
+export const CAMPAIGN ='/campaigns/:id';
 export const TEMPLATES ='/templates';
 export const CERTIFICATE = "/certificate"
 export const MUSICEVENT = "/musicevent"

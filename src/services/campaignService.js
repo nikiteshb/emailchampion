@@ -2,6 +2,9 @@ import axios from 'axios'
 
 const contactBaseUrl = "http://localhost:3000/campaigns";
 
+async function getCampaign(id){
+    return await axios.get(`${contactBaseUrl}/${id}`)
+}
 async function getCampaigns(){
     return await axios.get(contactBaseUrl)
 }
@@ -15,4 +18,4 @@ async function deleteCampaign(id){
     return await axios.delete(`${contactBaseUrl}/${id}`)
 }
 
-export {getCampaigns,addCampaign,updateCampaign,deleteCampaign} 
+export {getCampaign,getCampaigns,addCampaign,updateCampaign,deleteCampaign} 

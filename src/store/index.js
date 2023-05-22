@@ -10,8 +10,6 @@ const store = configureStore({
         user: UserSlice,
         contacts:ContactSlice
     },
-    devTools:true,
-
 })
 
 // function saveToLocalStorage(state) {

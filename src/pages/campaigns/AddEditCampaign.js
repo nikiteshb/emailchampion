@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { addCampaign } from "../../services/campaignService";
 import { useSelector } from "react-redux";
 import { getContacts } from "../../services/contactService";
+import { CampaignSchema } from "../../schemas";
 
 const initialValues = {
   name: "",
@@ -25,7 +26,7 @@ const templateRadioOptions = [
 
 const AddEditCampaign = (props) => {
   const [relatedContacts,setRelatedContacts] = useState([""])
-  let loggedinuser = useSelector((state) => state.auth)
+  const loggedinuser = useSelector((state) => state.auth)
 
   useEffect(() =>{
     getContacts().then((res) => {
@@ -36,7 +37,7 @@ const AddEditCampaign = (props) => {
   },[])  
 
   return (
-    <Formik initialValues={initialValues} onSubmit={(values, action) => {
+    <Formik initialValues={initialValues}   onSubmit={(values, action) => {
       // console.log(values.template)
       let templatevars
       if(values.template == "energy"){
@@ -64,7 +65,7 @@ const AddEditCampaign = (props) => {
       }
 
       let { data } = addCampaign({
-        userId: "1",
+        userid: `${loggedinuser.userid}`,
         name: `${values.name}`,
         subject: `${values.subject}`,
         status: "pending",
@@ -72,8 +73,7 @@ const AddEditCampaign = (props) => {
           name: `${values.template}`,
         },
         template_vars: templatevars,
-        contacts: `${values.selectedContacts}`,
-        userId: "2",
+        contacts: values.selectedContacts,
       })
       action.resetForm();
       props.onHide()
@@ -88,7 +88,7 @@ const AddEditCampaign = (props) => {
          isSubmitting,
          /* and other goodies */
        }) =>(
-        <form id="addEditCampaign" onSubmit={handleSubmit}>
+        <form id="addEditCampaign" onSubmit={handleSubmit} >
         <div className="row">
           <div className="form-group col-lg-6 mb-3">
             <label className="mb-2 fw-bold">Campaign Name</label>
@@ -100,6 +100,8 @@ const AddEditCampaign = (props) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.name && touched.name ? (<p className="form-error text-danger">{errors.name}</p>
+              ) : null}
           </div>
           <div className="form-group col-lg-6 mb-3">
             <label className="mb-2 fw-bold">Subject</label>
@@ -111,6 +113,8 @@ const AddEditCampaign = (props) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.subject && touched.subject ? (<p className="form-error text-danger">{errors.subject}</p>
+              ) : null}
           </div>
           <div
             role="group"
@@ -134,6 +138,8 @@ const AddEditCampaign = (props) => {
                 </label>
               </div>
             ))}
+            {errors.template && touched.template ? (<p className="form-error text-danger">{errors.template}</p>
+              ) : null}
           </div>
           <div className="col-lg-6 mb-3">
             {values.template == "energy" ? (
@@ -149,17 +155,21 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.corporationName && touched.corporationName ? (<p className="form-error text-danger">{errors.corporationName}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Bill Amount</label>
                     <Field
                       name="billAmount"
-                      type="text"
+                      type="number"
                       className="form-control"
                       value={values.billAmount}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.billAmount && touched.billAmount ? (<p className="form-error text-danger">{errors.billAmount}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Month</label>
@@ -171,17 +181,21 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.month && touched.month ? (<p className="form-error text-danger">{errors.month}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Year</label>
                     <Field
                       name="year"
-                      type="text"
+                      type="number"
                       className="form-control"
                       value={values.year}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.year && touched.year ? (<p className="form-error text-danger">{errors.year}</p>
+                    ) : null}
                   </div>
                 </div>
               </>
@@ -199,17 +213,21 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.issuer && touched.issuer ? (<p className="form-error text-danger">{errors.issuer}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Hours</label>
                     <Field
                       name="hours"
-                      type="text"
+                      type="number"
                       className="form-control"
                       value={values.hours}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.hours && touched.hours ? (<p className="form-error text-danger">{errors.hours}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Course Name</label>
@@ -221,6 +239,8 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.courseName && touched.courseName ? (<p className="form-error text-danger">{errors.courseName}</p>
+                    ) : null}
                   </div>
                 </div>
               </>
@@ -238,6 +258,8 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.bandName && touched.bandName ? (<p className="form-error text-danger">{errors.bandName}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Venue</label>
@@ -249,6 +271,8 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.venue && touched.venue ? (<p className="form-error text-danger">{errors.venue}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Event Date</label>
@@ -260,6 +284,8 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.eventDate && touched.eventDate ? (<p className="form-error text-danger">{errors.eventDate}</p>
+                    ) : null}
                   </div>
                   <div className="form-group col-lg-6 mb-3">
                     <label className="mb-2 fw-bold">Event Time</label>
@@ -271,6 +297,8 @@ const AddEditCampaign = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.eventTime && touched.eventTime ? (<p className="form-error text-danger">{errors.eventTime}</p>
+                    ) : null}
                   </div>
                 </div>
               </>
@@ -289,12 +317,12 @@ const AddEditCampaign = (props) => {
                     type="checkbox"
                     name="selectedContacts"
                     value={contact.id}
-                    checked={values.contacts.includes(contact.id) ? "true" : null}
+                    checked={values.contacts.includes(contact.id) ? true : null}
                   />
                   {contact.firstName}
                 </label>
               </div>
-            ))} 
+            ))}  
             </div>
           </div>
         </div>
@@ -303,7 +331,7 @@ const AddEditCampaign = (props) => {
         <button type="submit" className="btn btn-primary me-3">
           Submit
         </button>
-        <button className='btn btn-primary' onClick={props.onHide}>Cancel</button>
+        <button type="submit" className='btn btn-primary' onClick={props.onHide}>Cancel</button>
         </div>
       </form>
       )}

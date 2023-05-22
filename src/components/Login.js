@@ -8,6 +8,7 @@ import { Toast, ToastContainer } from "react-bootstrap";
 import { login } from "../store/Slices/AuthSlice";
 import { useDispatch } from "react-redux";
 import loginImg from '../assets/images/login_img.png';
+import { user } from "../store/Slices/UserSlice";
 
 const initialValues = {
   email: "",
