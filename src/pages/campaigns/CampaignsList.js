@@ -11,6 +11,7 @@ import { Link, Navigate } from "react-router-dom";
 function CampaignsList() {
   const [modalShow, setModalShow] = useState(false);
   const [delModalShow, setDelModalShow] = useState(false);
+  const [modalFor,setModalFor] =useState("")
   const [relatedCampaigns,setRelatedCampaigns]  = useState([])
   const [currCampaign,setCurrCampaign] = useState({})
   const userData =  useSelector((state) => state.user.data)
@@ -18,21 +19,27 @@ function CampaignsList() {
     setCurrCampaign(campaign)
     setDelModalShow(true)
   }
+  const addCurrContact = (type) =>{
+    setCurrCampaign(" ")
+    setModalShow(true)
+    setModalFor(type)
+  }
+  const editCurrContact = (campaign,type) =>{
+    setCurrCampaign(campaign)
+    setModalShow(true)
+    setModalFor(type)
+  }
   useEffect(() =>{
     getCampaigns().then((res) => setRelatedCampaigns(res.data))
   },[delModalShow])
 
- const previewCampaign = (campaign) => {
-    console.log(campaign.id)
-    Link(`/campaigns/${campaign.id}`)
-  }
   
   return (
     <>
       <div className="row">
         <div className="col-12 pb-4 text-end"> 
         {userData.length == 0 ? <p className="text-danger fw-bold">Please add Atleast 1 Contact to create Campaign</p> 
-        : <button type="submit" className="btn btn-primary mt-4" onClick={()=> setModalShow(true)} >
+        : <button type="submit" className="btn btn-primary mt-4" onClick={()=> addCurrContact("Add")} >
             New Campaign
           </button> }
 
@@ -77,7 +84,7 @@ function CampaignsList() {
                 <Link to={`/campaigns/${campaign.id}`} className="btn btn-link text-success" >
                   <MdDirectionsRun />
                 </Link>
-                  <Link type="button" className="btn btn-link text-primary" >
+                  <Link type="button" className="btn btn-link text-primary" onClick={() => editCurrContact(campaign,"Edit")}>
                 <MdMode /> 
                 </Link>
                 <Link type="button" className="btn btn-link text-danger" onClick={() => deleteCurrContact(campaign)}>
@@ -89,8 +96,8 @@ function CampaignsList() {
           </tbody>
         </table>
       </div>
-      <CampaignModal show={modalShow} onHide={() => setModalShow(false)} title = "Add Campaign">
-        <AddEditCampaign onHide={() => setModalShow(false)}/>
+      <CampaignModal show={modalShow} onHide={() => setModalShow(false)} title={modalFor} currCampaign={currCampaign}>
+        <AddEditCampaign onHide={() => setModalShow(false)} title={modalFor} currCampaign={currCampaign} />
       </CampaignModal> 
       <DeleteCampaignModal show={delModalShow} onHide={() => setDelModalShow(false)} name="campaign" currCampaign={currCampaign}/> 
 

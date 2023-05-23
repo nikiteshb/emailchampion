@@ -7,18 +7,33 @@ import { useSelector } from 'react-redux'
 
 function Campaign() {
   const {id} = useParams()
+ 
 
-  const [campaigns,setCampaigns] = useState()
-  const [reContacts,setReContacts] = useState([""])
+  const [curCampaign,setCurCampaign] = useState(null)
 
-  useEffect(() =>{
-      getCampaign(id).then(res => setCampaigns(res))
-  },[ ])
+  // useEffect(() =>{
+  //     getCampaign(id).then(res => setCampaigns(res))
+  // },[ ])
   // {campaigns.contactObj}
-  return (
-    <>
+
+  useEffect(() => {
     
-      {/* {campaigns.contactObj.map(contact => <Certificate key={contact.id} contact={contact} />)} */}
+    const getCampaignss = async () => {
+      if (id) {
+        const campaign = await getCampaign(id);
+        setCurCampaign(campaign);
+      }
+    };    
+    getCampaignss();
+  },[id])
+
+  // console.log(curCampaign);
+  
+  return (
+    
+    <>
+ 
+      {/* {curCampaign.map(contact => <Certificate key={contact.id} contact={contact} />)} */}
       {/* {campaigns.contactObj.map((campaign) => <Certificate key={campaign.id} contact={campaign}/>)} */}
       
     </>

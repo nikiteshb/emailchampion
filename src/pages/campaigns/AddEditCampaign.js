@@ -4,7 +4,6 @@ import { addCampaign } from "../../services/campaignService";
 import { useSelector } from "react-redux";
 import { getContacts } from "../../services/contactService";
 import { CampaignSchema } from "../../schemas";
-
 const initialValues = {
   name: "",
   subject: "",
@@ -14,7 +13,7 @@ const initialValues = {
   },
   template_vars: {},
   contacts: [],
-  userId: "1",
+  userId: "",
 };
 
 const templateRadioOptions = [
@@ -22,7 +21,6 @@ const templateRadioOptions = [
   { value: "certificate", label: "Certificate" },
   { value: "music", label: "Musical Night Invitation" },
 ];
-
 
 const AddEditCampaign = (props) => {
   const [relatedContacts,setRelatedContacts] = useState([""])
@@ -32,50 +30,45 @@ const AddEditCampaign = (props) => {
     getContacts().then((res) => {
       let contacts = res.data.filter(u => u.userId == loggedinuser.userid);
       setRelatedContacts(contacts);
-      console.log(relatedContacts);
     }); 
   },[])  
 
   return (
     <Formik initialValues={initialValues}  validationSchema={CampaignSchema} onSubmit={(values, action) => {
-      // console.log(values.template)
       let templatevars
       if(values.template == "energy"){
         templatevars = {
-          corporation_name: `${values.corporationName}`,
-          month: `${values.month}`,
-          year: `${values.year}`,
-          bill_amount: `${values.billAmount}`
+          corporation_name: values?.corporationName || "",
+          month: values?.month || "",
+          year: values?.year || "",
+          bill_amount: values?.billAmount || ""
           }
       }else if(values.template == "certificate"){
         templatevars = {
-          issuer: `${values.issuer}`,
-          hours: `${values.hours}`,
-          courseName: `${values.courseName}`,
+          issuer: values?.issuer || "",
+          hours: values?.hours || "",
+          courseName: values?.courseName || "",
           }
       }else if(values.template == "music"){
         templatevars = {
-          bandName: `${values.bandName}`,
-          venue: `${values.venue}`,
-          eventDate: `${values.eventDate}`,
-          eventTime: `${values.eventTime}`,
+          bandName: values?.bandName || "",
+          venue: values?.venue || "",
+          eventDate: values?.eventDate || "",
+          eventTime: values?.eventTime || "",
           }
       }else{
         templatevars = null
       }
-      // if(template.name == ""){
-
-      // }
       let { data } = addCampaign({
         userid: `${loggedinuser.userid}`,
-        name: `${values.name}`,
-        subject: `${values.subject}`,
+        name: values?.name || "",
+        subject: values?.subject || "",
         status: "pending",
         template: {
-          name: `${values.template}`,
+          name: values?.template || "",
         },
-        template_vars: templatevars,
-        contacts: values.selectedContacts,
+        template_vars: templatevars || "",
+        contacts: values?.selectedContacts || "energy",
       })
       action.resetForm();
       props.onHide()
@@ -86,10 +79,7 @@ const AddEditCampaign = (props) => {
          touched,
          handleChange,
          handleBlur,
-         handleSubmit,
-         isSubmitting,
-         dirty
-         /* and other goodies */
+         handleSubmit
        }) =>(
         <form id="addEditCampaign" onSubmit={handleSubmit} >
         <div className="row">
