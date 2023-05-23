@@ -1,41 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getCampaign } from '../../services/campaignService'
 import Certificate from '../templates/Certificate'
-import { getContacts } from '../../services/contactService'
-import { useSelector } from 'react-redux'
+import EnergyBill from '../templates/EnergyBill'
+import MusicEvent from '../templates/MusicEvent'
 
 function Campaign() {
   const {id} = useParams()
- 
-
+  const location= useLocation();
+  const campaignId = location.state?.campaignId;
+  const [isLoading,setLoading] = useState(true)
   const [curCampaign,setCurCampaign] = useState(null)
-
-  // useEffect(() =>{
-  //     getCampaign(id).then(res => setCampaigns(res))
-  // },[ ])
-  // {campaigns.contactObj}
-
+ 
   useEffect(() => {
-    
     const getCampaignss = async () => {
       if (id) {
         const campaign = await getCampaign(id);
         setCurCampaign(campaign);
+        setLoading(false)
       }
     };    
     getCampaignss();
-  },[id])
-
-  // console.log(curCampaign);
-  
-  return (
     
+  },[campaignId])
+
+  if(isLoading){
+    return <div className="">Loading, Please Wait</div>
+  }
+
+  return (
     <>
- 
-      {/* {curCampaign.map(contact => <Certificate key={contact.id} contact={contact} />)} */}
-      {/* {campaigns.contactObj.map((campaign) => <Certificate key={campaign.id} contact={campaign}/>)} */}
-      
+      {curCampaign && curCampaign.contactObj ? (
+        <>
+        {curCampaign.contactObj.map(contact => {
+          if(curCampaign.template.name === "energy"){
+            return <EnergyBill key={contact.id} campaign={curCampaign} contact={contact} />
+          }else if(curCampaign.template.name === "certificate"){
+            return <Certificate key={contact.id} campaign={curCampaign} contact={contact} />
+          }else if(curCampaign.template.name === "music"){
+            return <MusicEvent key={contact.id} campaign={curCampaign} contact={contact} />
+          }
+        }
+        )}
+        </>
+      ) : null}
     </>
   )
 }

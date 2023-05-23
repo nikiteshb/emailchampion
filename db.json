@@ -1,0 +1,209 @@
+{
+  "users": [
+    {
+      "name": "nikitesh",
+      "phone": "1234567890",
+      "email": "n@n.com",
+      "password": "12345678",
+      "repassword": "12345678",
+      "id": 1
+    },
+    {
+      "name": "nikitesh",
+      "phone": "7845124512",
+      "email": "nikitesh@gmail.com",
+      "password": "12345678",
+      "repassword": "12345678",
+      "id": 2
+    },
+    {
+      "name": "nikitesh",
+      "phone": "7845121245780",
+      "email": "nik@n.com",
+      "password": "12345678",
+      "repassword": "12345678",
+      "id": 3
+    },
+    {
+      "name": "nb",
+      "phone": "1245124578",
+      "email": "nikitesh.bhadade@globant.com",
+      "password": "12345678",
+      "repassword": "12345678",
+      "id": 4
+    }
+  ],
+  "contacts": [
+    {
+      "userId": "1",
+      "firstName": "Nikitesh",
+      "lastName": "Bhadade",
+      "email": "temp@temp.com",
+      "gender": "male",
+      "city": "nagpur",
+      "createdAt": "22/5/2023",
+      "id": 1
+    },
+    {
+      "userId": "1",
+      "firstName": "Charu",
+      "lastName": "Bhadade",
+      "email": "charu@charu.com",
+      "gender": "female",
+      "city": "nagpur",
+      "createdAt": "22/5/2023",
+      "id": 2
+    },
+    {
+      "userId": "1",
+      "firstName": "kimaya",
+      "lastName": "bhadade",
+      "email": "kimaya@kimaya.com",
+      "gender": "female",
+      "city": "nagpur",
+      "createdAt": "22/5/2023",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "firstName": "other",
+      "lastName": "contact",
+      "email": "other@other.com",
+      "gender": "male",
+      "city": "pune",
+      "createdAt": "24/5/2023",
+      "id": 4
+    },
+    {
+      "userId": "1",
+      "firstName": "temp",
+      "lastName": "temp",
+      "email": "nikiteshb@gmail.comad",
+      "gender": "male",
+      "city": "ngp",
+      "createdAt": "22/5/2023",
+      "id": 5
+    },
+    {
+      "userId": "4",
+      "firstName": "hello",
+      "lastName": "Bhadade",
+      "email": "nikiteshb@gmail.com",
+      "gender": "male",
+      "city": "ngp",
+      "createdAt": "22/5/2023",
+      "id": 6
+    },
+    {
+      "userId": "1",
+      "firstName": "hello",
+      "lastName": "hello",
+      "email": "temp@temp.coma",
+      "gender": "male",
+      "city": "adf",
+      "createdAt": "23/5/2023",
+      "id": 7
+    }
+  ],
+  "campaigns": [
+    {
+      "userid": "1",
+      "name": "certificate js may batch 2023",
+      "subject": "javascript certified developer",
+      "status": "pending",
+      "template": {
+        "name": "certificate"
+      },
+      "template_vars": {
+        "issuer": "Institute of Institure",
+        "hours": "100",
+        "courseName": "Js certified Developer"
+      },
+      "contacts": [
+        "1",
+        "3"
+      ],
+      "id": 2
+    },
+    {
+      "userid": "1",
+      "name": "energy bill",
+      "subject": "may 2023",
+      "status": "pending",
+      "template": {
+        "name": "energy"
+      },
+      "template_vars": {
+        "corporation_name": "maha vitran",
+        "month": "5",
+        "year": "2023",
+        "bill_amount": "2000"
+      },
+      "contacts": [
+        "1",
+        "4"
+      ],
+      "id": 7
+    },
+    {
+      "userid": "1",
+      "name": "certificate js June batch 2023",
+      "subject": "Certificate Java Developer",
+      "status": "pending",
+      "template": {
+        "name": "certificate"
+      },
+      "template_vars": {
+        "issuer": "Awesome Technologies",
+        "hours": 90,
+        "courseName": "Certified Java Developer"
+      },
+      "contacts": [
+        "1",
+        "2",
+        "3"
+      ],
+      "id": 8
+    },
+    {
+      "userid": "1",
+      "name": "Music Concert",
+      "subject": "Metallica Concert June 2023",
+      "status": "pending",
+      "template": {
+        "name": "music"
+      },
+      "template_vars": {
+        "bandName": "Metallica",
+        "venue": "Pune",
+        "eventDate": "2023-05-24",
+        "eventTime": "16:00"
+      },
+      "contacts": [
+        "1",
+        "2",
+        "5",
+        "7"
+      ],
+      "id": 9
+    },
+    {
+      "userid": "4",
+      "name": "certificate dot net may 2023 ",
+      "subject": "certificate dot net",
+      "status": "pending",
+      "template": {
+        "name": "certificate"
+      },
+      "template_vars": {
+        "issuer": "developer institute",
+        "hours": 1000,
+        "courseName": "Certified Dot net Developer"
+      },
+      "contacts": [
+        "6"
+      ],
+      "id": 10
+    }
+  ]
+}

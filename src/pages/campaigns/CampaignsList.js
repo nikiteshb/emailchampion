@@ -3,11 +3,10 @@ import { MdDirectionsRun, MdMode, MdOutlineDelete } from "react-icons/md";
 import { deleteCampaign, getCampaign, getCampaigns } from "../../services/campaignService";
 import CampaignModal from "../../modals/CampaignModal";
 import AddEditCampaign from "./AddEditCampaign";
-import { getContacts } from "../../services/contactService";
 import { useSelector } from "react-redux";
 import DeleteCampaignModal from "../../modals/DeleteCampaignModal";
-import { Link, Navigate } from "react-router-dom";
- 
+import { Link } from "react-router-dom";
+
 function CampaignsList() {
   const [modalShow, setModalShow] = useState(false);
   const [delModalShow, setDelModalShow] = useState(false);
@@ -15,6 +14,9 @@ function CampaignsList() {
   const [relatedCampaigns,setRelatedCampaigns]  = useState([])
   const [currCampaign,setCurrCampaign] = useState({})
   const userData =  useSelector((state) => state.user.data)
+  let loggedInuser = useSelector((state) => state.auth)
+  const [isLoading,setLoading] = useState(true)
+
   const deleteCurrContact = (campaign) =>{
     setCurrCampaign(campaign)
     setDelModalShow(true)
@@ -30,9 +32,19 @@ function CampaignsList() {
     setModalFor(type)
   }
   useEffect(() =>{
-    getCampaigns().then((res) => setRelatedCampaigns(res.data))
+    const getCampaignsall =async () =>{
+      if(loggedInuser.userid){
+        const campaigns = await getCampaigns(loggedInuser.userid)
+        setRelatedCampaigns(campaigns)
+        setLoading(false)
+      }
+    }
+    getCampaignsall()
   },[delModalShow])
 
+  if(isLoading){
+    return <div className="">Loading, Please Wait</div>
+  }
   
   return (
     <>

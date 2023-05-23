@@ -7,12 +7,12 @@ import { user } from '../../store/Slices/UserSlice';
 
 function Dashboard() {
     const loggedinuser = useSelector((state) => state.auth)
-    
     let params = useParams();
 
     let [RelativeContacts,setRelativeContacts] = useState("")
     let [RelativeCampaigns,setRelativeCampaigns] = useState("")
     let dispatch = useDispatch()
+    const [isLoading,setLoading] = useState(true)
     useEffect(() =>{
         getContacts().then((res) => {
             let contacts = res.data.filter((g) => g.userId == loggedinuser.userid);
@@ -20,13 +20,19 @@ function Dashboard() {
             dispatch(user(RelativeContacts))
           });
       
-          getCampaigns().then((res) => {
-            setRelativeCampaigns(res.data);
-          });
+          const getCampaignsall =async () =>{
+            if(loggedinuser.userid){
+              const campaigns = await getCampaigns(loggedinuser.userid)
+              setRelativeCampaigns(campaigns)
+              setLoading(false)
+            }
+          }
+          getCampaignsall()
           
-    },[RelativeContacts])
-    // console.log(RelativeContacts);
-
+    },[RelativeContacts,RelativeCampaigns])
+    if(isLoading){
+        return <div className="">Loading, Please Wait</div>
+      }
    
   return (
     <>

@@ -34,7 +34,7 @@ const CampaignSchema = Yup.object({
         then: Yup.object({
             corporationName:Yup.string().min(2).max(30).required("Please enter Name"),
             billAmount:Yup.number().required("Please enter Bill amount"),
-            month:Yup.string().min(2).max(20).required("Please enter month"),
+            month:Yup.string().min(1).max(10).required("Please enter month"),
             year:Yup.number().min(2).max(20).required("Please enter year"),
         }),
     })

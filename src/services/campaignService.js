@@ -16,8 +16,10 @@ const getCampaign = async (id) => {
       });
     return { ...campaign, contactObj};
 }
-async function getCampaigns(){
-    return await axios.get(campaignBaseUrl)
+async function getCampaigns(id){
+    const res = await axios.get(campaignBaseUrl)
+    const campiagns = res.data
+    return campiagns.filter((campaign)=> (campaign.userid == id))
 }
 async function addCampaign(Campaign){
     return await axios.post(campaignBaseUrl,Campaign)
