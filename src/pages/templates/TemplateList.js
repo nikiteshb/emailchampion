@@ -9,7 +9,6 @@ function TemplateList() {
                 <div className="card bg-white"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Certificate</h5>
-                    <h2 className="display-4">45</h2>
                     <Link className="btn btn-primary btn-sm mt-3" to={"/certificate"}>View all Certificates</Link>
                 </div>
                 </div>
@@ -18,7 +17,6 @@ function TemplateList() {
                 <div className="card bg-white"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Music Event</h5>
-                    <h2 className="display-4">45</h2>
                     <Link className="btn btn-primary btn-sm mt-3" to={"/musicevent"}>View all Music Events</Link>
                 </div>
                 </div>
@@ -27,7 +25,6 @@ function TemplateList() {
                 <div className="card bg-white"  >
                 <div className="card-body">
                     <h5 className="card-title fw-bold">Energy Bill</h5>
-                    <h2 className="display-4">3</h2>
                     <Link className="btn btn-primary btn-sm mt-3" to={"/energybill"}>View all Energy Bills</Link>
                 </div>
                 </div>
