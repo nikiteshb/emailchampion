@@ -1,36 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Certificate from '../templates/Certificate'
+import EnergyBill from '../templates/EnergyBill'
+import MusicEvent from '../templates/MusicEvent'
 
 function TemplateList() {
   return (
-    <div className="container">
-            <div className="row">
-                <div className="col-lg-3">
-                <div className="card bg-white"  >
-                <div className="card-body">
-                    <h5 className="card-title fw-bold">Certificate</h5>
-                    <Link className="btn btn-primary btn-sm mt-3" to={"/certificate"}>View all Certificates</Link>
-                </div>
-                </div>
-                </div>
-                <div className="col-lg-3">
-                <div className="card bg-white"  >
-                <div className="card-body">
-                    <h5 className="card-title fw-bold">Music Event</h5>
-                    <Link className="btn btn-primary btn-sm mt-3" to={"/musicevent"}>View all Music Events</Link>
-                </div>
-                </div>
-                </div>
-                <div className="col-lg-3">
-                <div className="card bg-white"  >
-                <div className="card-body">
-                    <h5 className="card-title fw-bold">Energy Bill</h5>
-                    <Link className="btn btn-primary btn-sm mt-3" to={"/energybill"}>View all Energy Bills</Link>
-                </div>
-                </div>
-                </div>
-            </div>
+    <>
+        <div className="py-3">
+          <Certificate/>
         </div>
+
+        <div className="py-3">
+          <EnergyBill/>
+        </div>
+
+        <div className="py-3">
+          <MusicEvent/>
+        </div>
+
+    </>
   )
 }
 

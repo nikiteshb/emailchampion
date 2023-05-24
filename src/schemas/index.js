@@ -6,8 +6,8 @@ const signupSchema = Yup.object({
     name:Yup.string().min(2).max(25).required("Please enter your Name "),
     phone:Yup.string().matches(phoneRegExp, "Phone number is not valid").required("Please enter your Contact"),
     email:Yup.string().email().required("Please enter your Email"),
-    // password:Yup.string().min(8).matches(passRegExp, "Please enter valid password. One uppercase, One lowercase, One Number, One special character").required("Please enter password"),
-    password:Yup.string().min(8).required("Please enter password"),
+    password:Yup.string().min(8).matches(passRegExp, "Please enter valid password. One uppercase, One lowercase, One Number, One special character").required("Please enter password"),
+    // password:Yup.string().min(8).required("Please enter password"),
     repassword:Yup.string().min(6).oneOf([Yup.ref("password"),null],"Please enter valid password. One uppercase, One lowercase, One Number, One special character").required("Please enter Repeat password")
 })
 
@@ -27,9 +27,8 @@ const ContactSchema = Yup.object({
 const CampaignSchema = Yup.object({
     name: Yup.string().min(2).max(30).required("Please enter Name"),
     subject: Yup.string().min(2).max(30).required("Please enter Subject"),
-    // template: Yup.string().required('template is required'),
     template_vars: Yup.object()
-    .when('template.name',{
+    .when('template',{
         is:'energy',
         then: Yup.object({
             corporationName:Yup.string().min(2).max(30).required("Please enter Name"),
@@ -38,7 +37,7 @@ const CampaignSchema = Yup.object({
             year:Yup.number().min(2).max(20).required("Please enter year"),
         }),
     })
-    .when('template.name',{
+    .when('template',{
         is:'certificate',
         then:Yup.object({
             issuer:Yup.string().min(2).max(30).required("Please enter Issuer"),
@@ -46,7 +45,7 @@ const CampaignSchema = Yup.object({
             courseName:Yup.string().min(2).max(30).required("Please enter course name"),
         }),
     })
-    .when('template.name',{
+    .when('template',{
         is:'music',
         then:Yup.object({
             bandName:Yup.string().min(2).max(30).required("Please enter band name"),

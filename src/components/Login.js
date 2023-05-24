@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { loginSchema } from "../schemas";
@@ -34,7 +34,7 @@ const Login = () => {
             (item.email === values.email) && (item.password === values.password)
           ));
         if (isExist) {
-            navigate(`/dashboard/${isExist[0].id}`);
+            navigate(`/dashboard`);
             let curruser = isExist[0]
             localStorage.setItem('loggedInUser', JSON.stringify(curruser));
             dispatch(login(curruser))
