@@ -50,7 +50,7 @@ function AddEditContact(props) {
             let isExist = resdata.filter(item => item.email == values.email && loggedinuser.userid == item.userId);
             if(props.edit){ 
               let {data} = updateContact(props.contact.id,{
-                userId: `${loggedinuser.userid}`,
+                userId: loggedinuser.userid,
                 firstName: `${values.firstName}`,
                 lastName: `${values.lastName}`,
                 email: `${values.email}`,
@@ -63,7 +63,7 @@ function AddEditContact(props) {
             }else{
               if (isExist.length === 0) { 
                 let { data } = addContact({
-                  userId: `${loggedinuser.userid}`,
+                  userId: loggedinuser.userid,
                   firstName: `${values.firstName}`,
                   lastName: `${values.lastName}`,
                   email: `${values.email}`,

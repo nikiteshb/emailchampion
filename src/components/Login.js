@@ -36,7 +36,7 @@ const Login = () => {
         if (isExist) {
             navigate(`/dashboard`);
             let curruser = isExist[0]
-            localStorage.setItem('loggedInUser', JSON.stringify(curruser));
+            localStorage.setItem('loggedInUser', JSON.stringify({...curruser,isLoggedIn: true}));
             dispatch(login(curruser))
         }
       }).catch((error)=>{         

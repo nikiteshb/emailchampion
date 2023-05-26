@@ -19,7 +19,10 @@ import NotFound from './pages/error/NotFound';
 import ProtectedRoutes from './navigation/ProtectedRoutes';
 import Campaign from './pages/campaigns/Campaign';
 import ErrorBoundary from './pages/error/ErrorBoundary'
+import { useSelector } from 'react-redux';
 function App() {
+
+  const isLoggedInUser = useSelector((state) => state.auth)
   
   return (
     <>
@@ -28,7 +31,7 @@ function App() {
         <Header/>          
           <div className="container py-5">          
             <Routes> 
-              <Route path={ROUTES.LOGIN} exact element={<Login />} />
+              <Route path={ROUTES.LOGIN} exact element={isLoggedInUser.isLoggedIn ? <Dashboard /> : <Login />} />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route element={<ProtectedRoutes />}>
               <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />  

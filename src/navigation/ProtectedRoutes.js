@@ -3,8 +3,8 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoutes = () => {
     const loggedinuser = useSelector((state) => state.auth)
-    console.log(loggedinuser);
-    return loggedinuser.isLoggedIn ? <Outlet /> : <Navigate to="/" />
+    // console.log(loggedinuser);
+    return loggedinuser.isLoggedIn ? <Outlet /> : <Navigate to="/" replace/>
 }
 
 export default ProtectedRoutes
