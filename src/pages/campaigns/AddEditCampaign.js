@@ -34,7 +34,7 @@ const AddEditCampaign = (props) => {
   },[])  
 
   return (
-    <Formik initialValues={initialValues}  validationSchema={CampaignSchema} onSubmit={(values, action) => {
+    <Formik initialValues={initialValues} onSubmit={(values, action) => {
       let templatevars
       if(values.template == "energy"){
         templatevars = {
